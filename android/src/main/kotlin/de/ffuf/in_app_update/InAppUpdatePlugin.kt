@@ -153,12 +153,14 @@ class InAppUpdatePlugin : FlutterPlugin, MethodCallHandler,
                         )
                         Unit
                     }
-                    appUpdateManager?.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        AppUpdateType.IMMEDIATE,
-                        activityProvider?.activity(),
-                        REQUEST_CODE_START_UPDATE
-                    )
+                    // TODO is this necessary for resuming immediate/flexible updates?
+                    // If so, put this back in and differentiate tween immediate/flexible
+//                    appUpdateManager?.startUpdateFlowForResult(
+//                        appUpdateInfo,
+//                        AppUpdateType.IMMEDIATE,
+//                        activityProvider?.activity(),
+//                        REQUEST_CODE_START_UPDATE
+//                    )
                 }
             }
     }
@@ -236,7 +238,7 @@ class InAppUpdatePlugin : FlutterPlugin, MethodCallHandler,
                         "updateAvailable" to true,
                         "immediateAllowed" to info.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE),
                         "flexibleAllowed" to info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE),
-                        "availableVersionCode" to info.availableVersionCode()
+                        "availableVersionCode" to info.availableVersionCode(),
                     )
                 )
             } else {
